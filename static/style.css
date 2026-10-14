@@ -274,4 +274,181 @@ select {
 
     }
 
+}```css
+/* FINAL FIX: Prevent unwanted horizontal page scrolling */
+
+html {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+    scroll-behavior: smooth;
 }
+
+body {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    margin: 0;
+    overflow-x: hidden;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+/* Keep the header and dashboard within the viewport */
+
+.topbar {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    flex-wrap: wrap;
+}
+
+.topbar > div,
+.top-actions {
+    min-width: 0;
+    max-width: 100%;
+}
+
+.top-actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+}
+
+.container {
+    width: 100%;
+    max-width: 1150px;
+    min-width: 0;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Prevent cards and grids from expanding the page */
+
+.card,
+.stats-grid,
+.metric-grid,
+.info-grid,
+.viva-grid,
+.bias-grid,
+.sample-list,
+.workflow,
+.auth-shell {
+    min-width: 0;
+    max-width: 100%;
+}
+
+.stats-grid,
+.metric-grid,
+.info-grid,
+.viva-grid {
+    grid-template-columns: repeat(
+        auto-fit,
+        minmax(min(100%, 220px), 1fr)
+    );
+}
+
+/* Keep text and form elements inside their containers */
+
+h1,
+h2,
+h3,
+p,
+span,
+strong,
+small,
+em {
+    overflow-wrap: anywhere;
+}
+
+input,
+textarea,
+select {
+    min-width: 0;
+    max-width: 100%;
+}
+
+textarea {
+    width: 100%;
+}
+
+button {
+    max-width: 100%;
+    white-space: normal;
+}
+
+/* Allow only the confusion matrix table to scroll internally */
+
+.table-scroll {
+    max-width: 100%;
+    overflow-x: auto;
+}
+
+/* Mobile layout */
+
+@media (max-width: 600px) {
+    .topbar {
+        padding: 16px;
+        align-items: flex-start;
+    }
+
+    .top-actions {
+        width: 100%;
+        justify-content: flex-start;
+    }
+
+    .container {
+        padding-left: 12px;
+        padding-right: 12px;
+    }
+
+    .card {
+        padding: 16px;
+    }
+
+    .input-row,
+    .result-head,
+    .section-title-row,
+    .history-heading {
+        flex-wrap: wrap;
+    }
+
+    .input-row > div {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+        max-width: 100%;
+    }
+
+    .input-row button {
+        margin: 0;
+    }
+
+    .workflow {
+        flex-wrap: wrap;
+    }
+
+    .chart-wrap #statsBars {
+        padding-right: 0;
+    }
+
+    .donut-chart {
+        position: relative;
+        top: auto;
+        right: auto;
+        margin: 20px auto;
+    }
+
+    .auth-page {
+        padding: 12px;
+    }
+
+    .auth-panel {
+        padding: 24px 16px;
+    }
+}
+```
