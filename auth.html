@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{ 'Create account' if mode == 'signup' else 'Sign in' }} | Cognitive Bias Detector</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}"></head>
+<body class="auth-page"><main class="auth-shell">
+<section class="auth-visual"><a class="auth-brand" href="{{ url_for('login') }}"><span class="brand-icon">🧠</span><span>Cognitive Bias<br><strong>Detector</strong></span></a>
+<div class="auth-hero"><span class="eyebrow">THINK CLEARER. DECIDE BETTER.</span><h1>Understand the patterns behind your thinking.</h1>
+<p>Explore language patterns, identify possible cognitive biases, and make more evidence-informed decisions.</p>
+<div class="brain-art" aria-hidden="true"><span>🧠</span><i class="orbit orbit-one"></i><i class="orbit orbit-two"></i><b class="bubble bubble-one">Insight</b><b class="bubble bubble-two">Evidence</b><b class="bubble bubble-three">Awareness</b></div></div>
+<p class="auth-footnote">An educational machine-learning project · Not a psychological diagnosis</p></section>
+<section class="auth-panel"><div class="auth-form-wrap"><div class="mobile-brand">🧠 Cognitive Bias Detector</div>
+<span class="eyebrow">WELCOME {{ 'ABOARD' if mode == 'signup' else 'BACK' }}</span>
+<h2>{{ 'Create your account' if mode == 'signup' else 'Sign in to your account' }}</h2>
+<p class="auth-subtitle">{{ 'Sign up to start exploring cognitive bias patterns.' if mode == 'signup' else 'Enter your details to continue to your dashboard.' }}</p>
+{% with messages = get_flashed_messages(with_categories=true) %}{% if messages %}{% for category, message in messages %}<div class="auth-alert {{ category }}">{{ message }}</div>{% endfor %}{% endif %}{% endwith %}
+<form method="post" class="auth-form">
+{% if mode == 'signup' %}<label for="name">Full name</label><input id="name" name="name" type="text" placeholder="Your name" autocomplete="name" required maxlength="100">{% endif %}
+<label for="email">Email address</label><input id="email" name="email" type="email" placeholder="you@example.com" autocomplete="email" required>
+<div class="password-label"><label for="password">Password</label>{% if mode == 'signup' %}<span>At least 8 characters</span>{% endif %}</div>
+<input id="password" name="password" type="password" placeholder="{{ 'Create a strong password' if mode == 'signup' else 'Enter your password' }}" autocomplete="{{ 'new-password' if mode == 'signup' else 'current-password' }}" minlength="{{ 8 if mode == 'signup' else 1 }}" required>
+{% if mode == 'signup' %}<label for="confirm_password">Confirm password</label><input id="confirm_password" name="confirm_password" type="password" placeholder="Re-enter your password" autocomplete="new-password" minlength="8" required>{% endif %}
+<button class="auth-submit" type="submit">{{ 'Create account' if mode == 'signup' else 'Sign in' }} <span>→</span></button></form>
+<p class="auth-switch">{{ 'Already have an account?' if mode == 'signup' else "Don't have an account yet?" }} <a href="{{ url_for('login' if mode == 'signup' else 'signup') }}">{{ 'Sign in' if mode == 'signup' else 'Create one' }}</a></p>
+<a class="back-link" href="{{ url_for('login') }}">← Cognitive Bias Detector</a></div></section></main></body></html>
